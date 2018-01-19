@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="syb.lq.dao.UserDao" >
+
+
+  <select id="selectUserInfo" resultType="syb.lq.model.UserInfo">
+  	select * from userinfo  limit #{start},#{pageSize}
+  </select>
+  
+<!--   <select id="findCount" resultType="long"> -->
+<!--   	select count(1) from userinfo -->
+<!--   </select> -->
+  
+  <select id="selectById" resultType="syb.lq.model.UserInfo">
+  select * from userinfo where id = #{id}
+  </select>
+  
+    <update id="updateByPrimaryKeySelective" parameterType="syb.lq.model.UserInfo" >
+    update userinfo
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="bir != null" >
+        bir = #{bir,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
